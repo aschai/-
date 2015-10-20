@@ -3,7 +3,7 @@ CREATE TABLE routes(
  name text NOT NULL,
  description text NOT NULL,
  base_price integer NOT NULL,
- start_town_id integer REFERENCES towns(id)
+ start_town_id integer NOT NULL REFERENCES towns(id)
 );
 CREATE TABLE tours(
  id serial PRIMARY KEY,
@@ -11,7 +11,7 @@ CREATE TABLE tours(
  duration integer NOT NULL,
  extra_contributions integer NOT NULL,
  extra_description text,
- route_id integer UNIQUE REFERENCES routes(id)
+ route_id integer UNIQUE NOT NULL REFERENCES routes(id)
 );
 
 CREATE TABLE towns(
@@ -23,11 +23,11 @@ CREATE TABLE excursions(
  name text NOT NULL,
  price integer NOT NULL,
  description text NOT NULL,
- town_id integer REFERENCES towns(id)
+ town_id integer NOT NULL REFERENCES towns(id)
 );
-CREATE TABLE tour_towns(
- town_id integer REFERENCES towns(id),
- route_id integer REFERENCES routes(id),
+CREATE TABLE tours_towns(
+ town_id integer NOT NULLL REFERENCES towns(id),
+ route_id integer NOT NULL REFERENCES routes(id),
  duration integer NOT NULL,
  PRIMARY KEY(town_id, route_id)
 );
